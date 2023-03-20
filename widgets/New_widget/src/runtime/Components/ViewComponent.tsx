@@ -1,128 +1,133 @@
-import React from "react";
-import { useEffect, useState,useRef } from "react"
+// import React from "react";
+// import { useEffect, useState, useRef } from "react"
 
-// modulos de arcgis
-import MapView from "esri/views/MapView";
+// // modulos de arcgis
+// import MapView from "esri/views/MapView";
+// import FeatureLayer from "esri/layers/FeatureLayer";;
 
-import { JimuMapViewConstructorOptions, MapViewManager } from 'jimu-arcgis';
-import { JimuMapView, JimuMapViewComponent } from 'jimu-arcgis';
-import { string } from "prop-types";
+// import { JimuMapViewConstructorOptions, MapViewManager } from 'jimu-arcgis';
+// import { JimuMapView, JimuMapViewComponent } from 'jimu-arcgis';
+
 
 
 // interface Myprops {
-//     id: string
+//   id: string;
 // }
 
 // function Viewcomponent(props: Myprops) {
 
-//     // estado inicial
-//     const [jimuMapView, setJimuMapView] = useState(null);
+//   const [view, setView] = useState<__esri.View>(null)
 
 
-//     // const mapContainer = document.querySelector("#map")
+//   const mapContainer = useRef<HTMLDivElement>(null);
+//   const createView = async () => {
+//     const mapViewManager = MapViewManager.getInstance();
+//     const mapView: __esri.MapView = new MapView({
+//       container: mapContainer.current,
+//       map: { basemap: "arcgis-streets-night" },
+//       center: [-74.663154, 5.45451],
+//       zoom: 4,
+//     });
 
-//     const mapContainer = React.createRef<HTMLDivElement>();
 
-//     // const CreateView = async () => {
-//     //     const mapViewManager = MapViewManager.getInstance();
-//     //     const mapView: __esri.MapView = new MapView({
-//     //         container: mapContainer.current,
-//     //         map: { basemap: "arcgis-streets-night" },
-//     //         center: [-74.663154, 5.454510],
-//     //         zoom: 1,
-//     //     });
-//     //     const options: JimuMapViewConstructorOptions = {
-//     //         dataSourceId: "",
-//     //         mapViewManager: mapViewManager,
-//     //         mapWidgetId: props.id,// IDENTIFICACION UNICA DEL WIDGET 
-//     //         view: mapView,
-//     //     }
+//     const options: JimuMapViewConstructorOptions = {
+//       dataSourceId: "218a38b281874c7fb694aa7b30facdab",
+//       mapViewManager: mapViewManager,
+//       mapWidgetId: props.id,
+//       view: mapView,
+//     };
+//     const resulView = await mapViewManager.createJimuMapView(options);
 
-//     //     const res = await mapViewManager.createJimuMapView(options)
-//     //     .then(jimumapview => setJimuMapView(jimumapview.view))
+//     setView(resulView.view)
 
-//     //     return res
-//     // }
 
-//     // useEffect(() => {
-//     //     const result = CreateView()
-//     //     console.log(result)
-//     //     // console.log(jimuMapView)
-//     // }, [])
 
-//     const CreateView = async () => {
-//         const mapViewManager = MapViewManager.getInstance();
-//         const mapView: __esri.MapView = new MapView({
-//             container: mapContainer.current,
-//             map: { basemap: "arcgis-streets-night" },
-//             center: [-74.663154, 5.454510],
-//             zoom: 1,
-//         });
-//         const options: JimuMapViewConstructorOptions = {
-//             dataSourceId: "",
-//             mapViewManager: mapViewManager,
-//             mapWidgetId: props.id,// IDENTIFICACION UNICA DEL WIDGET 
-//             view: mapView,
-//         }
-    
-//         mapViewManager.createJimuMapView(options).then(jimumapview => setJimuMapView(jimumapview.view));
-//     }
-    
-//     useEffect(() => {
-//         CreateView();
-//     }, []);
+//   };
 
-//     return (
-//         <div id="map" ref={mapContainer}>
-//        <div id="map" ref={mapContainer}>
-//         {jimuMapView && <JimuMapView jimuMapView={jimuMapView} />}
+//   useEffect(() => {
+//     createView();
+//   }, []);
+
+//   return(
+//     <div style={{ width: "100%", height: "100%" }}>
+//       <div id="map" style={{ width: "100%", height: "100%" }} ref={mapContainer}></div>
 //     </div>
-//     </div>
+//   )
 
-//     );
+
 // }
 
 
+// export default Viewcomponent;
 
-// export default Viewcomponent
 
-// import React, { useEffect, useState, useRef } from "react";
-// import { JimuMapView, JimuMapViewComponent } from "jimu-arcgis";
-// import MapView from "esri/views/MapView";
-// import { JimuMapViewConstructorOptions, MapViewManager } from "jimu-arcgis";
+import React, { useEffect, useState, useRef } from "react"
+import MapView from "esri/views/MapView";
+import FeatureLayer from "esri/layers/FeatureLayer";
+import { JimuMapViewConstructorOptions, MapViewManager } from 'jimu-arcgis';
+import { JimuMapView, JimuMapViewComponent } from 'jimu-arcgis';
+import { DataSourceComponent, DataSourceManager, QueriableDataSource, UseDataSource } from "jimu-core";
+
 
 interface Myprops {
-  id: string;
+  id: string,
+  useDataSources: UseDataSource[]
 }
 
-function Viewcomponent(props:Myprops) {
+function ViewComponent(props: Myprops) {
 
-    const mapContainer = useRef<HTMLDivElement>(null);
+  const [view, setView] = useState<__esri.View>(null)
 
-    const createView = async () => {
-      const mapViewManager = MapViewManager.getInstance();
-      const mapView: __esri.MapView = new MapView({
-        container: mapContainer.current,
-        map: { basemap: "arcgis-streets-night" },
-        center: [-74.663154, 5.45451],
-        zoom: 4,
-      });
-      
-      const options: JimuMapViewConstructorOptions = {
-        dataSourceId: "",
-        mapViewManager: mapViewManager,
-        mapWidgetId: props.id,
-        view: mapView,
-      };
-      await mapViewManager.createJimuMapView(options);
+  const dataSourceId = props.useDataSources[0].dataSourceId
+
+  const mapContainer = useRef<HTMLDivElement>(null);
+
+  const createView = async () => {
+    const mapViewManager = MapViewManager.getInstance();
+    // Create a new MapView instance
+    const mapView: __esri.MapView = new MapView({
+      container: mapContainer.current,
+      map: { basemap: "arcgis-streets-night" },
+      center: [-74.663154, 5.45451],
+      zoom: 4,
+    });
+
+
+    const options: JimuMapViewConstructorOptions = {
+      dataSourceId: dataSourceId,
+      mapViewManager: mapViewManager,
+      mapWidgetId: props.id,
+      view: mapView,
     };
-  
-    useEffect(() => {
-      createView();
-    }, []);
-  
-    return <div id="map" style={{ width: "100%", height: "100%" }} ref={mapContainer}></div>;
+    const jimuMapView = await mapViewManager.createJimuMapView(options);
+
+    setView(jimuMapView.view)
+    
+      const datasourceid =  dataSourceId && DataSourceManager.getInstance().getDataSource(dataSourceId) as QueriableDataSource
+      const idfeature = datasourceid.url
+      const ggg = new FeatureLayer({
+        url: idfeature
+      })
+      
+    view.map.add(ggg)
+
   }
 
+  
+  console.log(view)
 
-export default Viewcomponent;
+
+  useEffect(() => {
+    createView();
+   
+  }, []);
+
+  return (
+    <div style={{ width: "100%", height: "100%" }}>
+      <div id="map" style={{ width: "100%", height: "100%" }} ref={mapContainer}></div>
+
+    </div>
+  )
+}
+
+export default ViewComponent;
