@@ -13,6 +13,7 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   const store = getAppStore();
 
   return (
+    
 <Provider store={store}>
     <div className="widget-demo jimu-widget m-2">
       <MapDefault mapWidgetId={props.id} />

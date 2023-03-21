@@ -27,7 +27,6 @@ function MapDefault(props: Myprosp) {
     const [view1, setView] = useState<__esri.View>(null);
     const mapViewManager = MapViewManager.getInstance();
     const containerMap = useRef();
-    console.log(view1);
 
     const crearMap = async () => {
         if (view1 == null) {
@@ -52,13 +51,17 @@ function MapDefault(props: Myprosp) {
     useEffect(() => {
         crearMap()
     }, []);
-    const mystate= useSelector((state:IMState)=>state.MyState)
  
+   
+    const mystate= useSelector((state:IMState)=>state.MyState)
+    const viewT = mystate.view ? mystate.view.t : null;
+//   const initial=  useSelector((state:IMState)=>state.MyState.initiastate)
+ console.log(viewT)
     return (
         
         <div className="containerMap" ref={containerMap}>
-            <div>my name {mystate.view
-            }</div>
+                <div>my name {viewT}</div>
+                {/* <div>my name {mystate.view}</div> */}
         </div>
 
     )

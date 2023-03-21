@@ -1,27 +1,26 @@
-import {createSlice} from "@reduxjs/toolkit"
-import MapView from "esri/views/MapView"
-interface Mystate{
-    view:string
+import { createSlice } from "@reduxjs/toolkit"
+import { ImmutableObject } from 'jimu-core';
+
+interface MyState {
+  view: object,
+
 }
 
- export const initialstate:Mystate={
-    view:"estado inicial donde debe de ir el view"
+export const initialstate:MyState = {
+  view:{t:"fgdsf",b:"fsdfsd"}
 }
 
-
-export const viewSlice=createSlice({
-    name:"view",
-    initialState:initialstate,
-    reducers:{
-        addView:(state,action)=>{
-            state.view=action.payload
-        }
-      
-
+export const viewSlice = createSlice({
+  name: "view",
+  initialState: initialstate,
+  reducers: {
+    addView: (state, action) => {
+      state.view = action.payload
     }
+  }
 })
 
 
 export default viewSlice.reducer
 
-export const {addView}=viewSlice.actions
+export const { addView } = viewSlice.actions
