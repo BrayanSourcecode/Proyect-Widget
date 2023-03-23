@@ -6,24 +6,25 @@ import MapDefault from './components/map_default'
 
 
 
-
-
-const Widget = (props: AllWidgetProps<IMConfig>) => {
+export default function Widget  (props: AllWidgetProps<IMConfig>)  {
 // sacamos el estado  para gregarlo al provider
   const store = getAppStore();
 
   return (
-    
-<Provider store={store}>
     <div className="widget-demo jimu-widget m-2">
-      <MapDefault mapWidgetId={props.id} />
-    </div>
-</Provider>
+ 
+  </div>
+// {/* <Provider store={store}> */}
+//     <div className="widget-demo jimu-widget m-2">
+//       {/* <MapDefault mapWidgetId={props.id} /> */}
+//     </div>
+// </Provider>
 
-  )
+
+)
 }
 
-export default Widget
+
 
 
 
