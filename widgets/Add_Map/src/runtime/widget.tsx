@@ -11,14 +11,11 @@ export default function Widget  (props: AllWidgetProps<IMConfig>)  {
   const store = getAppStore();
 
   return (
+<Provider store={store}> 
     <div className="widget-demo jimu-widget m-2">
- 
-  </div>
-// {/* <Provider store={store}> */}
-//     <div className="widget-demo jimu-widget m-2">
-//       {/* <MapDefault mapWidgetId={props.id} /> */}
-//     </div>
-// </Provider>
+       <MapDefault mapWidgetId={props.id} /> 
+    </div>
+</Provider>
 
 
 )
