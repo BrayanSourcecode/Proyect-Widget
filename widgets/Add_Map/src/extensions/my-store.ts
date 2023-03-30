@@ -6,8 +6,6 @@ import viewSlice,{ initialstate } from '../runtime/Reducer/viewSlice';
 interface MyState {
   view:{t:string,b:string},
   name:string,
-
-
 }
 
 type IMMyState = ImmutableObject<MyState>;

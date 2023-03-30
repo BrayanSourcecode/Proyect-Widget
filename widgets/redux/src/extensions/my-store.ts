@@ -44,6 +44,6 @@ export default class MyReduxStoreExtension implements extensionSpec.ReduxStoreEx
   }
 
   getStoreKey() {
-    return 'myState-redux';
+    return 'myState';
   }
 }

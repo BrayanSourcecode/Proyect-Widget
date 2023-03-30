@@ -2,8 +2,8 @@
   "name": "Add_Map",
   "label": "add_map",
   "type": "widget",
-  "version": "1.10.0",
-  "exbVersion": "1.10.0",
+  "version": "1.11.0",
+  "exbVersion": "1.11.0",
   "dependency": [
     "jimu-arcgis"
   ],

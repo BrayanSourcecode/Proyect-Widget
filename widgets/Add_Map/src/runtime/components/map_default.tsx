@@ -11,23 +11,25 @@ import "./map_default.css"
 
 import { useDispatch } from "react-redux"
 import { addView } from "../Reducer/viewSlice"
-
+import { IMConfig } from '../../config'
 import { useSelector } from 'react-redux';
-import {AllWidgetProps,IMState } from 'jimu-core'
+import {AllWidgetProps,getAppStore,IMState } from 'jimu-core'
 
 interface Myprosp {
     mapWidgetId: string
     typeMap?:string
+    config:IMConfig
 }
 
 
-function MapDefault(props: Myprosp) {
+function MapDefault(props:Myprosp) {
 
     // const dispatch=useDispatch();
     const [view1, setView] = useState<__esri.View>(null);
+    // const store = getAppStore();
+    // const state= store.getState().MyState
     const mapViewManager = MapViewManager.getInstance();
     const containerMap = useRef();
-
     const crearMap = async () => {
         if (view1 == null) {
             const optiones: JimuMapViewConstructorOptions = ({
@@ -52,16 +54,15 @@ function MapDefault(props: Myprosp) {
         crearMap()
     }, []);
  
-   
-    const mystate= useSelector((state:IMState)=>state.MyState)
-    const viewT = mystate.view ? mystate.view.t : null;
-//   const initial=  useSelector((state:IMState)=>state.MyState.initiastate)
- console.log(viewT)
+    const tex=["prueba"]
+    const rre=props.config.getIn(tex)
+  console.log(rre)
+    // const mystate= useSelector((state:IMState)=>state.MyState)
+    // const viewT = mystate.view ? mystate.view.t : null;
+
+//  console.log(state.view.t)
     return (
-        
         <div className="containerMap" ref={containerMap}>
-                <div>my name {viewT}</div>
-                {/* <div>my name {mystate.view}</div> */}
         </div>
 
     )

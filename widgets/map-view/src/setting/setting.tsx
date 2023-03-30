@@ -17,7 +17,7 @@
   A copy of the license is available in the repository's
   LICENSE file.
 */
-import { React, Immutable, UseDataSource ,DataSourceTypes} from 'jimu-core';
+import { React, Immutable, UseDataSource ,DataSourceTypes, getAppStore} from 'jimu-core';
 import { AllWidgetSettingProps} from 'jimu-for-builder';
 
 import {DataSourceSelector} from 'jimu-ui/advanced/data-source-selector';
@@ -32,6 +32,7 @@ export default class Setting extends React.PureComponent<AllWidgetSettingProps<{
     });
   }
 
+ 
   render(){
     return <div className="sample-map-view-setting p-2">
       <DataSourceSelector
