@@ -1,48 +1,52 @@
+// modulos de jimu core
+
+// modulos de react
 import React, { useRef } from "react"
 import { useEffect, useState } from "react"
 import "./map_default.css"
 
-// modulos 
-import MapView from "esri/views/MapView"
-import SceneView from "esri/views/SceneView"
+
+// librerias de jimu argis
 import { JimuMapView, JimuMapViewConstructorOptions, MapViewManager } from "jimu-arcgis"
 
-// css 
-import "./map_default.css"
+// modulos  de  api de js
+import MapView from "esri/views/MapView"
+import SceneView from "esri/views/SceneView"
+// modulos de jimu iu 
 import { Switch } from 'jimu-ui'
 
-import { useDispatch } from "react-redux"
-import { addView } from "../Reducer/viewSlice"
-import { IMConfig } from '../../config'
-import { useSelector } from 'react-redux';
-import { AllWidgetProps, getAppStore, IMState } from 'jimu-core'
-import { bottom } from "@popperjs/core"
-import Result from "dist/widgets/common/print/src/runtime/component/classic/result"
+// estilos css 
+import "./map_default.css"
 
+import { IMConfig } from '../../config'
+
+
+
+// definimos las tipo de las propiedades que vamos a recibir
 interface Myprosp {
     mapWidgetId: string
-    typeMap?: string
+    // typeMap?: string
     config: IMConfig
 }
 
-
+//  creamos el componente
 function MapDefault(props: Myprosp) {
 
-    // const dispatch=useDispatch();
+    //  estados
     const [view_actual, setView] = useState<__esri.View>(null);
     const [check_Map3D, setCheck_Map3D] = useState(false)
     const [check_MapBase, setCheck_MapBase] = useState(false)
 
-
-
-    // const store = getAppStore();
-    // const state= store.getState().MyState
-
+// creamos el gestor de la views
     const mapViewManager = MapViewManager.getInstance();
+//creamos la referencia para el div del mapa 
     const containerMap = useRef();
 
+// creamos una fucion asyncrona para crear el mapa
     const crearMap = async () => {
+
         if (view_actual == null) {
+            // 
             const optiones: JimuMapViewConstructorOptions = ({
                 mapWidgetId: props.mapWidgetId,
                 dataSourceId: "",
@@ -53,6 +57,7 @@ function MapDefault(props: Myprosp) {
                     zoom: 1
                 })
             });
+            
             const { view } = await mapViewManager.createJimuMapView(optiones)
             setView(view)
 

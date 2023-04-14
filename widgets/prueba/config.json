@@ -1,0 +1,11 @@
+{
+    "exampleConfigProperty": "test"
+    ,
+  "extensions": [
+    {
+      "name": "My Store",
+      "point": "REDUX_STORE",
+      "uri": "/extensions/my-store"
+    }
+  ]
+}
