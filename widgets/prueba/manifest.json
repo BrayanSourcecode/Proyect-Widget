@@ -15,13 +15,6 @@
   "translatedLocales": [
     "en"
   ],
-  "extensions": [
-    {
-      "name": "My Store",
-      "point": "REDUX_STORE",
-      "uri": "/extensions/my-store"
-    }
-  ],
   "defaultSize": {
     "width": 800,
     "height": 500
